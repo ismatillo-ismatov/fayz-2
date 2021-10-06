@@ -1,0 +1,43 @@
+{% extends 'bose.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+<div class="text-center">
+{% if messages %}
+{% for m in messages %}
+    <h2>{{ m }}</h2>
+  {% endfor %}
+  {% endif %}
+</div>
+        </div>
+      <div class="col-md-8 offset-2  mt-5 card">
+<div class="form-group">
+<div class="text-center">
+<form action="" method="post">
+    <div class="form-group">
+<label for="">login</label>
+<input type="text" name="login" required class="form-control">
+
+    </div>
+    {% csrf_token %}
+<div class="form-group">
+<label for=""> Parol</label>
+    <input type="password" name="password" required class="form-control">
+    </div>
+
+    <div class="form-group">
+<input type="submit" value="kirish" class="btn btn-info">
+    </div>
+
+</form>
+</div>
+</div>
+<div class="text-center">
+<h3>Ro'yhatdan o'tganmisiz?<a href="{% url 'user:signup' %}">Ro'yhatdan o'tish</a></h3>
+</div>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

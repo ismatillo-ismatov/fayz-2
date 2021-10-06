@@ -1,0 +1,13 @@
+{% extends 'bose.html' %}
+{% block content %}
+<div class="container">
+    <h1>Postni o'chirish</h1>
+    <form action="" method="post">{% csrf_token %}
+        <p style="color: red">'{{ post.title }}' postni o'chrasizmi? </p>
+        <input type="submit" value="O'chirish">
+
+    </form>
+</div>
+
+
+{% endblock %}

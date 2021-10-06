@@ -1,0 +1,20 @@
+{% extends 'bose.html' %}
+{% block content %}
+<div class="container-float">
+    <div class="row">
+        <div class="col-md-4">
+<div class="text-center">
+<div class="card">
+    <img src="" alt="no image">
+    <p>{{ user.username }}</p>
+    <a href="#">Profilni ozgartirish<i class="fa fa-wrench" ></i></a>
+    <a href="{%  url 'user:change_password'%}">Parolni o'zgartirish</a>
+    <a href="{% url 'user:logout'  %}">Chiqish</a>
+</div>
+</div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

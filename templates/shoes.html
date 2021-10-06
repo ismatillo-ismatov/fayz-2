@@ -1,0 +1,134 @@
+{% extends 'bose.html'%}
+{% block content %}
+
+
+   <body class="main-layout">
+	<!-- header section start -->
+
+	<!-- New Arrivals section start -->
+  <div class="collection_text">Shoes</div>
+    <div class="collection_section layout_padding">
+    	<div class="container">
+    		<h1 class="new_text"><strong>New Arrivals Products</strong></h1>
+    	    <p class="consectetur_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+    	</div>
+    </div>
+    <div class="layout_padding gallery_section">
+    	<div class="container">
+    		<div class="row">
+                        {% for p in post %}
+
+    			<div class="col-sm-4">
+
+    				<div class="best_shoes">
+
+    					<p class="best_text">Best Shoes </p>
+                        <div class="shoes_icon"><a href="{% url 'blog:detail' p.pk %}"><img src="{{p.image.url}}"></a></div>
+    					<div class="star_text">
+    						<div class="left_part">
+<!--    							<ul>-->
+<!--    	    						<li><a href="#"><img src="{{p.image.url}}"></a></li>-->
+<!--    	    						<li><a href="#"><img src="{{p.image.url}}"></a></li>-->
+<!--    &lt;!&ndash;    	    						<li><a href="#"><img src="{{p.image.url}}"></a></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;    	    						<li><a href="#"><img src="{{p.image.url}}"></a></li>&ndash;&gt;-->
+<!--    &lt;!&ndash;    	    						<li><a href="#"><img src="{{p.image.url}}"></a></li>&ndash;&gt;-->
+<!--    	    					</ul>-->
+    						</div>
+    						<div class="right_part">
+    							<div class="shoes_price">$ <span style="color: #ff4e5b;">{{p.price}}</span></div>
+																{% if request.user.is_superuser %}
+
+								<button class="btn btn-danger ml-0"><a href="{% url 'enjoy:update' p.pk %}">Update</a></button>
+								<button style="float:left" class="btn btn-danger"><a href="{% url 'enjoy:delete' p.pk %}">Delete</a> </button>
+								{% endif  %}
+    						</div>
+    					</div>
+
+    				</div>
+
+
+    			</div>
+				{% endfor %}
+
+			</div>
+            		<nav aria-label="...">
+  <ul class="pagination">
+<!--    <li class="page-item disabled">-->
+      <a class="page-link" {% if page.has_previous %}
+      href="?page={{ page.previous_page_number }}"
+         {% else %}
+        href="#"
+         {% endif %}>previous</a>
+<!--    </li>-->
+
+      {% for n in page.paginator.page_range %}
+<!--    <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+      {% if page.number == n %}
+    <li class="page-item active">
+      <a class="page-link" href="?page={{ n }}">{{ n }}<span class="sr-only"></span></a></li>
+    {% elif n > page.number|add:-3 and n <  page.number|add:3 %}
+    <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+      {% endif %}
+      {% endfor %}
+    <li class="page-item">
+      <a class="page-link"
+         {% if page.has_next %}
+
+         href="?page={{ page.next_page_number }}"
+        {% else %}
+         href="#"
+        {% endif %}
+      >next</a>
+<!--    </li>-->
+  </ul>
+</nav>
+		</div>
+
+
+      <!-- Javascript files-->
+      <script src="js/jquery.min.js"></script>
+      <script src="js/popper.min.js"></script>
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/jquery-3.0.0.min.js"></script>
+      <script src="js/plugin.js"></script>
+      <!-- sidebar -->
+      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="js/custom.js"></script>
+      <!-- javascript -->
+      <script src="js/owl.carousel.js"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script>
+         $(document).ready(function(){
+         $(".fancybox").fancybox({
+         openEffect: "none",
+         closeEffect: "none"
+         });
+
+
+$('#myCarousel').carousel({
+            interval: false
+        });
+
+        //scroll slides on swipe for touch enabled devices
+
+        $("#myCarousel").on("touchstart", function(event){
+
+            var yClick = event.originalEvent.touches[0].pageY;
+            $(this).one("touchmove", function(event){
+
+                var yMove = event.originalEvent.touches[0].pageY;
+                if( Math.floor(yClick - yMove) > 1 ){
+                    $(".carousel").carousel('next');
+                }
+                else if( Math.floor(yClick - yMove) < -1 ){
+                    $(".carousel").carousel('prev');
+                }
+            });
+            $(".carousel").on("touchend", function(){
+                $(this).off("touchmove");
+            });
+        });
+      </script>
+   {% endblock %}
+   </body>
+</html>

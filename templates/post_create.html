@@ -1,0 +1,15 @@
+{% extends 'bose.html' %}
+{% block content %}
+
+<h1>Yangi Post</h1>
+<button style="float:right"><a href="{% url 'enjoy:update' %}" style="">update</a></button>
+
+<form action="" method="post">
+    {%csrf_token%}
+    {{ form.as_p }}
+    <input type="submit" value="saqlash">
+</form>
+
+
+
+{% endblock %}

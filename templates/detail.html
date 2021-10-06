@@ -1,0 +1,16 @@
+{% extends 'bose.html' %}
+{% block content %}
+
+<div class="text-center">
+  <img src="{{ post.image.url }}" class="rounded" alt="...">
+</div>
+<div class="text-center">
+  <span class="border border-white">
+  <h1>{{ post.name }}</h1>
+  <h3>{{ post.price }}$</h3>
+  <p>{{ post.desc }}</p>
+  </span>
+</div>
+
+
+{% endblock %}
